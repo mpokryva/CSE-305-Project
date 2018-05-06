@@ -1,10 +1,9 @@
-var mysql = require("mysql");
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  database : 'agency'
+const { Client } = require("pg");
+
+const connString = 'postgresql://ubuntu:cse305@localhost/agency'
+const client = new Client({
+	connectionString: connString
 });
-connection.connect();
+client.connect();
 
-
-module.exports = connection;
+module.exports = client;
