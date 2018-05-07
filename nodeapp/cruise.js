@@ -15,12 +15,6 @@ router.post('/', function(req, res) {
 	const arrCity = req.body.arr_city;
 	const minPrice = req.body.min_price;
 	const maxPrice = req.body.max_price;
-	console.log(depDate);
-	console.log(arrDate);
-	console.log(depCity);
-	console.log(arrCity);
-	console.log(maxPrice);
-	console.log(minPrice);
 	var query = "SELECT * FROM cruise WHERE";
 	var params = [];
 	if (depDate.length != 0) {
@@ -30,6 +24,9 @@ router.post('/', function(req, res) {
 		}
 		params.push(depDate)
 		query +=  "date(dep_date) = $" + params.length
+	} else {
+		res.send("Must select departure date.");
+		return;
 	}
 	if (minPrice.length != 0) {
 		query += " ";
@@ -54,6 +51,9 @@ router.post('/', function(req, res) {
 		}
 		params.push(arrDate)
 		query +=  "date(arr_date) = $" + params.length;
+	} else {
+		res.send("Must select return date.");
+		return;
 	}
 	if (depCity.length != 0) {
 		query += " ";
@@ -62,6 +62,9 @@ router.post('/', function(req, res) {
 		}
 		params.push(depCity)
 		query += "dep_id IN (SELECT id from location WHERE city = $" + params.length + ")";
+	} else {
+		res.send("Must select departure city.");
+		return;
 	}
 	if (arrCity.length != 0) {
 		query += " ";
@@ -70,6 +73,9 @@ router.post('/', function(req, res) {
 		}
 		params.push(arrCity)
 		query += "arr_id IN (SELECT id from location WHERE city = $" + params.length + ")";
+	} else {
+		res.send("Must select return city.");
+		return;
 	}
 	if (params.length == 0) {
 		query = "SELECT * FROM cruise";

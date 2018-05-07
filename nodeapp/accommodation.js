@@ -9,12 +9,11 @@ module.exports = router;
 
 router.post('/', function(req, res) {
 	console.log(req.body);
-	const pickupCity = req.body.pickup_city;
+	const city = req.body.city;
 	const minPrice = req.body.min_price;
 	const maxPrice = req.body.max_price;
-	const minCapacity = req.body.min_seating_capacity;
-	const sortBy = req.body.sort_by;
-	var query = "SELECT * FROM car_rental WHERE";
+	const type = req.body.accommodation_type;
+	var query = "SELECT * FROM accommodation WHERE";
 	var params = [];
 	if (minPrice.length != 0) {
 		query += " ";
@@ -32,30 +31,29 @@ router.post('/', function(req, res) {
 		params.push(maxPrice)
 		query += "daily_rate <= $" + params.length;	
 	}
-	if (pickupCity.length != 0) {
+	if (city.length != 0) {
 		query += " ";
 		if (params.length != 0) {
 			query += "AND "
 		}
-		params.push(pickupCity)
-		query += "pickup_loc_id IN (SELECT id from location WHERE city = $" + params.length + ")";
+		params.push(city)
+		query += "location_id IN (SELECT id from location WHERE city = $" + params.length + ")";
 	} else {
-		res.send("Must select pick up city.");
+		res.send("Must select city.");
 		return;
 	}
-	if (minCapacity.length != 0) {
+	if (type.length != 0) {
 		query += " ";
 		if (params.length != 0) {
 			query += "AND "
 		}
-		params.push(minCapacity);
-		query += "seating_capacity >= $" + params.length;
+		params.push(type)
+		query += "type = $" + params.length;
 	}
 	if (params.length == 0) {
-		query = "SELECT * FROM car_rental";
+		query = "SELECT * FROM accommodation";
 	}
-	const sortParam = (sortBy == "Price") ? "daily_rate" : "seating_capacity";
-	query += " ORDER BY " + sortParam; 
+	query += " ORDER BY daily_rate"; 
 	query += ";";
 	console.log(query);
 	db.query(query, params, function (err, dbRes) {

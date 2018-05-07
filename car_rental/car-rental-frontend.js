@@ -8,17 +8,21 @@ $(document).ready(function() {
 });
 
 function loadTable() {
-	var rentals = JSON.parse(sessionStorage.getItem("car-rentals"));
-	console.log(rentals)
+	var results = JSON.parse(sessionStorage.getItem("car-rentals"));
+	console.log(results)
+	if (!(results instanceof Array)) {
+		alert(results);
+		return;
+	}
 	// Insert in reverse to display correctly.
-	for (var i = rentals.length - 1; rentals != null && i >=0; i--) {
-		var rental = rentals[i];
-		var row = '<tr class="car-rental-row"> <th scope="row">' + rental.make + '</th>\
-		<td>' + rental.model + '</td>\
-		<td>' + rental.year + '</td>\
-		<td>' + rental.seating_capacity + '</td>\
-		<td>' + rental.car_type + '</td>\
-		<td>' + rental.daily_rate + '</td>\
+	for (var i = results.length - 1; results != null && i >=0; i--) {
+		var res = results[i];
+		var row = '<tr class="car-rental-row"> <th scope="row">' + res.make + '</th>\
+		<td>' + res.model + '</td>\
+		<td>' + res.year + '</td>\
+		<td>' + res.seating_capacity + '</td>\
+		<td>' + res.car_type + '</td>\
+		<td>' + res.daily_rate + '</td>\
 		</tr>';
 		$("#car-rental-table tbody").prepend(row);
 	}

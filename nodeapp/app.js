@@ -10,6 +10,9 @@ app.use("/api/cruise", cruise);
 const car_rental = require("./car_rental")
 app.use("/api/car_rental", car_rental);
 
+const accommodation = require("./accommodation")
+app.use("/api/accommodation", accommodation);
+
 const addmember = require("./addmember");
 app.use("/api/addmember", addmember);
 
