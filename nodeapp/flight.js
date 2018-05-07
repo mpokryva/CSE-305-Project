@@ -9,17 +9,22 @@ router.use(bodyParser.json());
 module.exports = router;
 
 router.post('/', function(req, res) {
+	console.log(req.body);
 	const depDate = req.body.dep_date;
 	const arrDate = req.body.arr_date;
 	const depCity = req.body.dep_city;
 	const arrCity = req.body.arr_city;
+	const minPrice = req.body.min_price;
+	const maxPrice = req.body.max_price;
 	console.log(depDate);
 	console.log(arrDate);
 	console.log(depCity);
 	console.log(arrCity);
+	console.log(maxPrice);
+	console.log(minPrice);
 	var query = "SELECT * FROM flight WHERE";
 	var params = [];
-	if (depDate !== undefined) {
+	if (depDate.length != 0) {
 		query += " ";
 		if (params.length != 0) {
 			query += "AND "
@@ -27,7 +32,23 @@ router.post('/', function(req, res) {
 		params.push(depDate)
 		query +=  "date(dep_date) = $" + params.length
 	}
-	if (arrDate !== undefined) {
+	if (minPrice.length != 0) {
+		query += " ";
+		if (params.length != 0) {
+			query += "AND "
+		}
+		params.push(minPrice)
+		query += "fare >= $" + params.length;	
+	}
+	if (maxPrice.length != 0) {
+		query += " ";
+		if (params.length != 0) {
+			query += "AND "
+		}
+		params.push(maxPrice)
+		query += "fare <= $" + params.length;	
+	}
+	if (arrDate.length != 0) {
 		query += " ";
 		if (params.length != 0) {
 			query += "AND "
@@ -35,7 +56,7 @@ router.post('/', function(req, res) {
 		params.push(arrDate)
 		query +=  "date(arr_date) = $" + params.length;
 	}
-	if (depCity !== undefined) {
+	if (depCity.length != 0) {
 		query += " ";
 		if (params.length != 0) {
 			query += "AND "
@@ -43,7 +64,7 @@ router.post('/', function(req, res) {
 		params.push(depCity)
 		query += "dep_id IN (SELECT id from location WHERE city = $" + params.length + ")";
 	}
-	if (arrCity !== undefined) {
+	if (arrCity.length != 0) {
 		query += " ";
 		if (params.length != 0) {
 			query += "AND "
@@ -60,7 +81,7 @@ router.post('/', function(req, res) {
 		if (err) {
 			res.send(err);
 		} else {
-			res.send(dbRes);
+			res.send(dbRes.rows);
 		}
 	})
 });

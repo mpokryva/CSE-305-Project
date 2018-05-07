@@ -1,0 +1,43 @@
+const express = require("express");
+const router = express.Router();
+const bodyParser = require("body-parser");
+const db = require("./db");
+router.use(bodyParser.urlencoded({extended: true}));
+router.use(bodyParser.json());
+
+
+module.exports = router;
+
+router.post('/', function(req, res) {
+	console.log(req.body);
+	const pid = parseInt(req.body.pid);
+	const fn = ""+req.body.firstname;
+	const ln = "" + req.body.lastname;
+	const rating = parseInt(req.body.rating);
+	const review ="" + req.body.review;
+	var params = [];
+	params.push(pid);
+	params.push(fn);
+	params.push(ln);
+	params.push(rating);
+	params.push(review);
+	console.log(pid);
+	console.log(fn);
+	console.log(ln);
+	console.log(rating);
+	console.log(review);
+	
+	var query = "INSERT INTO review VALUES (DEFAULT,$1,$2,$3,$4,$5);";
+	console.log(query);
+	console.log(params);
+	db.query(query, params, function (err, dbRes) {
+		if (err) {
+			res.send(err);
+			console.log(err);
+		} else {
+			res.send(dbRes.rows);
+			console.log("success");
+		}
+	})
+
+});

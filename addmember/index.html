@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- PAGE settings -->
   <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
-  <title>Styleguide</title>
+  <title>Add Group Member</title>
   <meta name="author" content="Pingendo">
   <!-- CSS dependencies -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -19,12 +19,9 @@
         <div class="col-md-12">
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="#">Home</a>
+              <a href="/">Home</a>
             </li>
-            <li class="breadcrumb-item">
-              <a href="#">Parent</a>
-            </li>
-            <li class="breadcrumb-item active">Page</li>
+            <li class="breadcrumb-item active">Add Member </li>
           </ul>
         </div>
       </div>
@@ -43,39 +40,56 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <form method="post" action="">
+          <form method="post" action="/api/addmember/">
             <div class="form-group my-3">
-              <input type="text" class="form-control" name="firstname" placeholder="First Name" required="required"> </div>
+              <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" required="required"> </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="lastname" placeholder="Last Name" required="required"> </div>
-            <div class="form-group my-3">
+              <input type="text" class="form-control" id = "firstname" name="lastname" placeholder="Last Name" required="required"> </div>
+            <div class="form-group py-3">
               <div class="input-group">
                 <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">@</span></div>
-                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Email" name="email" required="required"> </div>
+                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Email" id = "email" name="email" required="required"> </div>
             </div>
-            <div class="form-group"><label for="exampleInputEmail1"></label><select class="form-control"><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div>
-            <div class="form-group  my-3">
-              <input type="number" class="form-control" name="age" placeholder="Age" required="required" max="120" min="0"> </div>
+            <h3 class="display-5 text-center">We will never sell your information.</h3>
+            <div class="form-group "><label for="exampleInputEmail1"></label>
+              <select class="form-control" name = "gender" id = "gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group  py-2">
+              <input type="number" class="form-control" name="age" id = "age" placeholder="Age" required="required" max="120" min="0"> </div>
             <div class="form-group"><label for="exampleInputEmail1"></label>
               <div class="form-check ">
-                <input class="form-check-input" value="on" type="checkbox" rid="exampleCheck1"><label class="form-check-label" for="exampleCheck1"><u>Terms and Conditions</u></label></div>
+                <input class="form-check-input" required="required" value="on" type="checkbox" rid="exampleCheck1"><label class="form-check-label" for="exampleCheck1"><a href="/terms"><u>Terms and Conditions</u></a></label></div>
             </div>
             <button type="submit" class="btn btn-primary my-2">Add Person</button>
-            <button type="submit" class="btn btn-primary my-2">Finish</button>
           </form>
+          <form action="/pay">
+          	<div class ="text-center btn-lg">
+	            <button style="float: center;" type="submit" class="btn btn-primary my-2">Finish</button>
+			</div>
+			</form>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <hr> </div>
       </div>
     </div>
   </div>
   <script src="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:180px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo&nbsp;&nbsp;
-    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
-  </pingendo>
+ 
 </body>
 
 </html>
