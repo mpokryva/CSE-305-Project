@@ -16,14 +16,14 @@ router.post('/', function(req, res) {
 	const arrCity = req.body.arr_city;
 	const minPrice = req.body.min_price;
 	const maxPrice = req.body.max_price;
-	console.log(depDate);
-	console.log(arrDate);
-	console.log(depCity);
-	console.log(arrCity);
-	console.log(maxPrice);
-	console.log(minPrice);
-	var query = "SELECT * FROM flight WHERE";
 	var params = [];
+	var query = "select * from (select dep.flight_no, dep.airline, " +
+	"dep.class, dep.fare, dep_city, arr_city, dep.dep_date, dep.arr_date " +
+   	"from (select flight.*, location.city as arr_city from flight, " + 
+	"location where flight.arr_id = location.id) as dep " +
+    "JOIN (select flight.*, location.city as dep_city from flight, " + 
+	"location where flight.dep_id = location.id) as arr " +
+    "on dep.flight_no = arr.flight_no) as res where";
 	if (depDate.length != 0) {
 		query += " ";
 		if (params.length != 0) {
@@ -31,9 +31,6 @@ router.post('/', function(req, res) {
 		}
 		params.push(depDate)
 		query +=  "date(dep_date) = $" + params.length
-	} else {
-		res.send("Must select departure date.")
-		return;
 	}
 	if (minPrice.length != 0) {
 		query += " ";
@@ -58,9 +55,6 @@ router.post('/', function(req, res) {
 		}
 		params.push(arrDate)
 		query +=  "date(arr_date) = $" + params.length;
-	} else {
-		res.send("Must select arrival date.")
-		return;
 	}
 	if (depCity.length != 0) {
 		query += " ";
@@ -68,7 +62,7 @@ router.post('/', function(req, res) {
 			query += "AND "
 		}
 		params.push(depCity)
-		query += "dep_id IN (SELECT id from location WHERE city = $" + params.length + ")";
+		query += "dep_city =$" + params.length;
 	} else {
 		res.send("Must select departure city.")
 		return;
@@ -79,13 +73,16 @@ router.post('/', function(req, res) {
 			query += "AND "
 		}
 		params.push(arrCity)
-		query += "arr_id IN (SELECT id from location WHERE city = $" + params.length + ")";
-	} else {
-		res.send("Must select return city.");
-		return;
+		query += "arr_city =$" + params.length;
 	}
 	if (params.length == 0) {
-		query = "SELECT * FROM flight"
+	query = "select * from (select dep.flight_no, dep.airline, " +
+	"dep.class, dep.fare, dep_city, arr_city, dep.dep_date, dep.arr_date " +
+   	"from (select flight.*, location.city as arr_city from flight, " + 
+	"location where flight.arr_id = location.id) as dep " +
+    "JOIN (select flight.*, location.city as dep_city from flight, " + 
+	"location where flight.dep_id = location.id) as arr " +
+    "on dep.flight_no = arr.flight_no) as res";
 	}
 	query += ";";
 	console.log(query);
