@@ -2,7 +2,6 @@ $("#dep_date").datepicker({});
 $("#arr_date").datepicker({});
 const serverURL = "http://130.245.170.55";
 $(document).ready(function() {
-	console.log("hey")
 	$("#cruise-form").submit(function(e) {
 		e.preventDefault();
 		var formData = jsonForm($("#cruise-form").serializeArray());

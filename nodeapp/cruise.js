@@ -72,7 +72,7 @@ router.post('/', function(req, res) {
 		query += "arr_id IN (SELECT id from location WHERE city = $" + params.length + ")";
 	}
 	if (params.length == 0) {
-		query = "SELECT * FROM flight"
+		query = "SELECT * FROM cruise";
 	}
 	query += ";";
 	console.log(query);

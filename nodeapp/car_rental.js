@@ -9,35 +9,20 @@ module.exports = router;
 
 router.post('/', function(req, res) {
 	console.log(req.body);
-	const depDate = req.body.dep_date;
-	const arrDate = req.body.arr_date;
-	const depCity = req.body.dep_city;
-	const arrCity = req.body.arr_city;
+	const pickupCity = req.body.pickup_city;
 	const minPrice = req.body.min_price;
 	const maxPrice = req.body.max_price;
-	console.log(depDate);
-	console.log(arrDate);
-	console.log(depCity);
-	console.log(arrCity);
-	console.log(maxPrice);
-	console.log(minPrice);
-	var query = "SELECT * FROM cruise WHERE";
+	const minCapacity = req.body.min_seating_capacity;
+	const sortBy = req.body.sort_by;
+	var query = "SELECT * FROM car_rental WHERE";
 	var params = [];
-	if (depDate.length != 0) {
-		query += " ";
-		if (params.length != 0) {
-			query += "AND "
-		}
-		params.push(depDate)
-		query +=  "date(dep_date) = $" + params.length
-	}
 	if (minPrice.length != 0) {
 		query += " ";
 		if (params.length != 0) {
 			query += "AND "
 		}
 		params.push(minPrice)
-		query += "fare >= $" + params.length;	
+		query += "daily_rate >= $" + params.length;	
 	}
 	if (maxPrice.length != 0) {
 		query += " ";
@@ -45,35 +30,29 @@ router.post('/', function(req, res) {
 			query += "AND "
 		}
 		params.push(maxPrice)
-		query += "fare <= $" + params.length;	
+		query += "daily_rate <= $" + params.length;	
 	}
-	if (arrDate.length != 0) {
+	if (pickupCity.length != 0) {
 		query += " ";
 		if (params.length != 0) {
 			query += "AND "
 		}
-		params.push(arrDate)
-		query +=  "date(arr_date) = $" + params.length;
+		params.push(pickupCity)
+		query += "pickup_loc_id IN (SELECT id from location WHERE city = $" + params.length + ")";
 	}
-	if (depCity.length != 0) {
+	if (minCapacity.length != 0) {
 		query += " ";
 		if (params.length != 0) {
 			query += "AND "
 		}
-		params.push(depCity)
-		query += "dep_id IN (SELECT id from location WHERE city = $" + params.length + ")";
-	}
-	if (arrCity.length != 0) {
-		query += " ";
-		if (params.length != 0) {
-			query += "AND "
-		}
-		params.push(arrCity)
-		query += "arr_id IN (SELECT id from location WHERE city = $" + params.length + ")";
+		params.push(minCapacity);
+		query += "seating_capacity >= $" + params.length;
 	}
 	if (params.length == 0) {
-		query = "SELECT * FROM flight"
+		query = "SELECT * FROM car_rental";
 	}
+	const sortParam = (sortBy == "Price") ? "daily_rate" : "seating_capacity";
+	query += " ORDER BY " + sortParam; 
 	query += ";";
 	console.log(query);
 	db.query(query, params, function (err, dbRes) {

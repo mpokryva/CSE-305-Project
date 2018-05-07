@@ -7,6 +7,9 @@ app.use("/api/flight", flight);
 const cruise = require("./cruise")
 app.use("/api/cruise", cruise);
 
+const car_rental = require("./car_rental")
+app.use("/api/car_rental", car_rental);
+
 const addmember = require("./addmember");
 app.use("/api/addmember", addmember);
 

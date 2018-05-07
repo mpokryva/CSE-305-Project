@@ -2,17 +2,17 @@ $("#dep_date").datepicker({});
 $("#arr_date").datepicker({});
 const serverURL = "http://130.245.170.55";
 $(document).ready(function() {
-	$("#flight-form").submit(function(e) {
+	$("#car-rental-form").submit(function(e) {
 		e.preventDefault();
-		var formData = jsonForm($("#flight-form").serializeArray());
+		var formData = jsonForm($("#car-rental-form").serializeArray());
 		console.log(formData);
 		$.ajax({
 			type: "POST",
-			url: "/api/flight",
+			url: "/api/car_rental",
 			data: formData,
 			success: function(res) {
-				sessionStorage.setItem("flights", JSON.stringify(res));
-				window.location.replace(serverURL + "/flight")
+				sessionStorage.setItem("car-rentals", JSON.stringify(res));
+				window.location.replace(serverURL + "/car_rental")
 			}, 
 			error: function(res) {
 				alert("Error");
