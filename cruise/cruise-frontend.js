@@ -18,9 +18,11 @@ function loadTable() {
 		var res = results[i];
 		var depDate = new Date(res.dep_date);
 		var arrDate = new Date(res.arr_date);
-		var row = '<tr class="cruise-row"> <th scope="row">' + res.cruise_no + '</th>\
+		var row = '<tr class="cruise-row"> <th scope="row">' + res.cruise_line + '</th>\
 		<td>' + depDate.toLocaleTimeString() + '</td>\
 		<td>' + arrDate.toLocaleTimeString() + '</td>\
+		<td>' + res.dep_city + '</td>\
+		<td>' + res.arr_city + '</td>\
 		<td>' + res.class + '</td>\
 		<td>' + res.fare + '</td>\
 		</tr>';
