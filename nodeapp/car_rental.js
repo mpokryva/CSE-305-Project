@@ -14,7 +14,8 @@ router.post('/', function(req, res) {
 	const maxPrice = req.body.max_price;
 	const minCapacity = req.body.min_seating_capacity;
 	const sortBy = req.body.sort_by;
-	var query = "SELECT * FROM car_rental WHERE";
+	var query = "SELECT * FROM (SELECT car_rental.*, location.city " +
+		"FROM car_rental, location WHERE pickup_loc_id = location.id) AS res WHERE";
 	var params = [];
 	if (minPrice.length != 0) {
 		query += " ";
@@ -38,7 +39,7 @@ router.post('/', function(req, res) {
 			query += "AND "
 		}
 		params.push(pickupCity)
-		query += "pickup_loc_id IN (SELECT id from location WHERE city = $" + params.length + ")";
+		query += "city = $" + params.length;
 	} else {
 		res.send("Must select pick up city.");
 		return;
@@ -52,7 +53,8 @@ router.post('/', function(req, res) {
 		query += "seating_capacity >= $" + params.length;
 	}
 	if (params.length == 0) {
-		query = "SELECT * FROM car_rental";
+		query = "SELECT * FROM (SELECT car_rental.*, location.city " +
+			"FROM car_rental, location WHERE pickup_loc_id = location.id) AS res";
 	}
 	const sortParam = (sortBy == "Price") ? "daily_rate" : "seating_capacity";
 	query += " ORDER BY " + sortParam; 
