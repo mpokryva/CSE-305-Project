@@ -13,7 +13,8 @@ router.post('/', function(req, res) {
 	const minPrice = req.body.min_price;
 	const maxPrice = req.body.max_price;
 	const type = req.body.accommodation_type;
-	var query = "SELECT * FROM accommodation WHERE";
+	var query = "SELECT * FROM (SELECT accommodation.*, location.city " +
+		"FROM accommodation, location WHERE location_id = location.id) AS res WHERE";
 	var params = [];
 	if (minPrice.length != 0) {
 		query += " ";
@@ -37,10 +38,7 @@ router.post('/', function(req, res) {
 			query += "AND "
 		}
 		params.push(city)
-		query += "location_id IN (SELECT id from location WHERE city = $" + params.length + ")";
-	} else {
-		res.send("Must select city.");
-		return;
+		query += "city = $" + params.length;
 	}
 	if (type.length != 0) {
 		query += " ";
@@ -51,7 +49,8 @@ router.post('/', function(req, res) {
 		query += "type = $" + params.length;
 	}
 	if (params.length == 0) {
-		query = "SELECT * FROM accommodation";
+		query = "SELECT * FROM (SELECT accommodation.*, location.city " +
+			"FROM accommodation, location WHERE location_id = location.id) AS res";
 	}
 	query += " ORDER BY daily_rate"; 
 	query += ";";

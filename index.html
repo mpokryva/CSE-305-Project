@@ -12,82 +12,123 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="elegant.css" type="text/css"> </head>
 
-<body class="">
-  <div class="">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="/">Home</a>
-            </li>
-          </ul>
+  <body class="">
+    <div class="">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="/">Home</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h1 class="display-3 text-capitalize text-center">Elegante Travel Agency</h1>
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="display-3 text-capitalize text-center">Elegante Travel Agency</h1>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="py-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h2>Select a trip option below:</h2>
-          <hr class="mb-4"> </div>
+    <div class="py-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>Select a trip option below:</h2>
+            <hr class="mb-4"> </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <a class="btn btn-primary btn-lg btn-block" name = "accommodation" id = "accommodation" href="/accommodation/filter.html">Book an Accommodation</a>
+                </div>
+                <div class="col-md-6">
+                  <a class="btn btn-primary btn-lg btn-block" id = "flight" name = "flight" href="/flight/filter.html" >Book a Flight</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
+      <div class="">
+        <div class="container">
           <div class="row">
             <div class="col-md-6">
-              <a class="btn btn-primary btn-lg btn-block" href="/accommodation/filter.html">Book an Accomodation</a>
+              <a class="btn btn-primary btn-lg btn-block" name = "cruise" id = "cruise" href="/cruise/filter.html">Book a Cruise</a>
             </div>
             <div class="col-md-6">
-              <a class="btn btn-primary btn-lg btn-block" href="/flight/filter.html">Book a Flight</a>
+              <a class="btn btn-primary btn-lg btn-block" name = "car" id = "car" href="/car_rental/filter.html">Rent a Car</a>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <a class="btn btn-primary btn-lg btn-block" href="/cruise/filter.html">Book a Cruise</a>
-        </div>
-        <div class="col-md-6">
-          <a class="btn btn-primary btn-lg btn-block" href="/car_rental/filter.html">Rent a Car</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <a class="btn btn-primary btn-lg btn-block" href="/flight/filter.html"><b>Book a Package</b></a>
-          <div class="row py-3">
-            <div class="col-md-12 text-center">
-              <a class="btn btn-primary btn-lg text-center" href="/review">Write a Review</a>
+      <div class="py-2">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <a class="btn btn-primary btn-lg btn-block" name = "package" id = "package" data-toggle="modal" data-target="#packageModal"><b>Book a Package</b></a>
+              <!-- Modal -->
+              <div id="packageModal" class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Select Package Options</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div id="p_modal_body" class="modal-body">
+                      <div class="checkbox">
+                        <label><input type="checkbox" value="flight">Flight</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value="cruise">Cruise</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value="car_rental">Car Rental</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value="accommodation">Accommodation</label>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button id="package_modal_btn" type="button" class="btn btn-primary">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+              <div class="row py-3">
+                <div class="col-md-12 text-center">
+                  <a class="btn btn-primary btn-lg text-center" name = "package" id = "review" href="/review">Write a Review</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="">
-    <div class="container"> </div>
-  </div>
-  <script src="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <div class="">
+        <div class="container"> </div>
+      </div>
+      <script src="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="landing.js"></script>
 
-</body>
+    </body>
 
-</html>
+    </html>

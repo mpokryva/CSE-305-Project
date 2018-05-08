@@ -19,7 +19,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-})
+});
 
 function jsonForm(formArray) {
 	var ret = {};

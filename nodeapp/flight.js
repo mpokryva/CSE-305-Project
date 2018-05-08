@@ -63,9 +63,6 @@ router.post('/', function(req, res) {
 		}
 		params.push(depCity)
 		query += "dep_city =$" + params.length;
-	} else {
-		res.send("Must select departure city.")
-		return;
 	}
 	if (arrCity.length != 0) {
 		query += " ";

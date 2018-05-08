@@ -11,7 +11,7 @@ $(document).ready(function() {
 			url: "/api/car_rental",
 			data: formData,
 			success: function(res) {
-				sessionStorage.setItem("car-rentals", JSON.stringify(res));
+				sessionStorage.setItem("car_rentals", JSON.stringify(res));
 				window.location.replace(serverURL + "/car_rental")
 			}, 
 			error: function(res) {

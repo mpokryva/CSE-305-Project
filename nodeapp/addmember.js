@@ -10,10 +10,10 @@ module.exports = router;
 
 router.post('/', function(req, res) {
 	console.log(req.body);
-	const fn = ""+req.body.firstname;
-	const ln = "" + req.body.lastname;
-	const email = "" +req.body.email;
-	const gender ="" + req.body.gender;
+	const fn = req.body.firstname;
+	const ln = req.body.lastname;
+	const email = req.body.email;
+	const gender = req.body.gender;
 	const age = parseInt(req.body.age);
 	var params = [];
 	params.push(fn);
@@ -36,6 +36,8 @@ router.post('/', function(req, res) {
 			console.log(err);
 		} else {
 			console.log("success");
+			console.log(dbRes.rows[0]);
+			res.send(dbRes.rows[0]);			
 		}
 	})
 

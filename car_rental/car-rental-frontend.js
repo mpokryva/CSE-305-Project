@@ -23,31 +23,24 @@ $(document).ready(function() {
 });
 
 function redirect() {
-	var bookingType = sessionStorage.getItem("booking_type");
+	var bookingType = JSON.parse(sessionStorage.getItem("booking_type"));
+	var bookingStep = parseInt(sessionStorage.getItem("booking_step"));
 	console.log(bookingType);
-	if (bookingType == null) {
+	console.log(bookingStep);
+	if (bookingType == null || bookingStep == null) {
 		return alert("An error has occured.");
 	}
-	var path;
-	switch (bookingType) {
-		case "flight":
-			return alert("An error has occured.");
-		case "cruise":
-			return alert("An error has occured.");
-		case "car_rental":
-			path = "/pay";
-			break;
-		case "accommodation":
-			return alert("An error has occured.");
-		case "package":
-			path = "/accommodation/filter.html"
-			break;
+	bookingStep++;
+	sessionStorage.setItem("booking_step", bookingStep);
+	if (bookingStep >= bookingType.length) {
+		window.location.replace(serverURL + "/addmember");
+	} else {
+		window.location.replace(serverURL + "/" + bookingType[bookingStep] + "/filter.html");
 	}
-	window.location.replace(serverURL + path);
 }
 
 function loadTable() {
-	results = JSON.parse(sessionStorage.getItem("car-rentals"));
+	results = JSON.parse(sessionStorage.getItem("car_rentals"));
 	console.log(results)
 	if (!(results instanceof Array)) {
 		alert(results);

@@ -62,9 +62,6 @@ router.post('/', function(req, res) {
 		}
 		params.push(depCity)
 		query += "dep_city = $" + params.length;
-	} else {
-		res.send("Must select departure city.");
-		return;
 	}
 	if (arrCity.length != 0) {
 		query += " ";
@@ -81,7 +78,7 @@ router.post('/', function(req, res) {
 		"location where cruise.arr_id = location.id) as dep " +
 		"JOIN (select cruise.*, location.city as dep_city from cruise, " + 
 		"location where cruise.dep_id = location.id) as arr " +
-		"on dep.cruise_no = arr.cruise_no) as res where";
+		"on dep.cruise_no = arr.cruise_no) as res";
 	}
 	query += ";";
 	console.log(query);

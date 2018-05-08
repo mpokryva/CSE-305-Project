@@ -40,9 +40,6 @@ router.post('/', function(req, res) {
 		}
 		params.push(pickupCity)
 		query += "city = $" + params.length;
-	} else {
-		res.send("Must select pick up city.");
-		return;
 	}
 	if (minCapacity.length != 0) {
 		query += " ";
