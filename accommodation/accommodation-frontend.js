@@ -41,18 +41,18 @@ function redirect() {
 
 
 function loadTable() {
-	var results = JSON.parse(sessionStorage.getItem("accommodations"));
+	results = JSON.parse(sessionStorage.getItem("accommodations"));
 	console.log(results)
 	if (!(results instanceof Array)) {
 		alert(results);
 		return;
 	}
-	for (var i = results.length - 1; results != null && i >= 0; i--) {
+	for (var i = 0; results != null && i < results.length; i++) {
 		var res = results[i];
 		var row = '<tr class="accommodation-row"> <th scope="row">' + res.name + '</th>\
 		<td>' + res.type + '</td>\
 		<td>' + res.daily_rate + '</td>\
 		</tr>';
-		$("#accommodation-table tbody").prepend(row);
+		$("#accommodation-table tbody").append(row);
 	}
 }

@@ -58,6 +58,6 @@ function loadTable() {
 		<td>' + res.class + '</td>\
 		<td>' + res.fare + '</td>\
 		</tr>';
-		$("#flight-table tbody").prepend(row);
+		$("#flight-table tbody").append(row);
 	}
 }
