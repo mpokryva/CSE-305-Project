@@ -1,3 +1,4 @@
+const serverURL = "http://130.245.170.55";
 $(document).ready(function() {
 	var price = 0;
 	var flight = sessionStorage.getItem("flight");
@@ -6,26 +7,20 @@ $(document).ready(function() {
 		loadTable();
 		price += parseFloat(flight.fare);
 	} else {
+		console.log("HDING");
 		$("#flight-table").hide();
-		$("#flight-label").hide();
 	}
 	var cruise = sessionStorage.getItem("cruise");
 	if (cruise != null){
 		cruise = JSON.parse(cruise);
 		loadTable2();
 		price += parseFloat(cruise.fare);
-	}else {
-		$("#cruise-table").hide();
-		$("#cruise-label").hide();
 	}
 	var car_rental = sessionStorage.getItem("car_rental");
 	if (car_rental != null){
 		car_rental = JSON.parse(car_rental);
 		loadTable3();
 		price += parseFloat(car_rental.daily_rate);
-	}else {
-		$("#car-rental-table").hide();
-		$("#car-rental-label").hide();
 	}
 	var accommodation = sessionStorage.getItem("accommodation");
 	if (accommodation != null){
@@ -33,12 +28,53 @@ $(document).ready(function() {
 		console.log(accommodation);
 		loadTable4();
 		price += parseFloat(accommodation.daily_rate);
-	}else {
-		$("#accommodation-table").hide();
-		$("#accommodation-label").hide();
 	}
 	document.getElementById("price").value = price;
 	$('p#amntdue').text("Total: $ "+ price+".00");
+
+	$("#payment-form").submit(function(e) {
+		e.preventDefault();
+		var formData = jsonForm($("#payment-form").serializeArray());
+		var accommodation = JSON.parse(sessionStorage.getItem("accommodation"));
+		if (accommodation != null) {
+			formData.accommodation_id = accommodation.id;
+		}
+		var flight = JSON.parse(sessionStorage.getItem("flight"));
+		if (flight != null) {
+			formData.flight_no = flight.flight_no;
+		}
+		var rental = JSON.parse(sessionStorage.getItem("car_rental"));
+		if (rental != null) {
+			formData.rental_no = rental.rental_no;
+		}
+		var cruise = JSON.parse(sessionStorage.getItem("cruise"));
+		if (cruise != null) {
+			formData.cruise_no = cruise.cruise_no;
+		}
+		var memberIds = JSON.parse(sessionStorage.getItem("member_ids"));
+		if (memberIds != null) {
+			formData.member_ids = memberIds;
+		}
+		console.log(formData);
+		$.ajax({
+			type: "POST",
+			url: "/api/payment",
+			data: formData,
+			success: function(res) {
+				console.log(res);
+				if(confirm("Booking was successful!")) {
+					window.location.replace(serverURL);
+				} else {
+					window.location.replace(serverURL);
+				}
+			}, 
+			error: function(err) {
+				console.log(err);
+				alert(err);
+			}
+		});
+	});
+
 });
 
 function loadTable() {
@@ -102,4 +138,16 @@ function loadTable4() {
 	<td>' + res.daily_rate + '</td>\
 	</tr>';
 	$("#accommodation-table tbody").prepend(row);	
+}
+
+function createBooking(){ 
+	var payment_id = sessionStorage.getItem("payment_id")
+}
+
+function jsonForm(formArray) {
+	var ret = {};
+	for (var i = 0; i < formArray.length; i++){
+		ret[formArray[i]['name']] = formArray[i]['value'];
+	}
+	return ret;
 }
