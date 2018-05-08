@@ -1,22 +1,31 @@
 $(document).ready(function() {
-var price = 0;
+	var price = 0;
 	var flight = sessionStorage.getItem("flight");
 	if (flight != null){
 		flight = JSON.parse(flight);
 		loadTable();
 		price += parseFloat(flight.fare);
+	} else {
+		$("#flight-table").hide();
+		$("#flight-label").hide();
 	}
 	var cruise = sessionStorage.getItem("cruise");
 	if (cruise != null){
 		cruise = JSON.parse(cruise);
 		loadTable2();
 		price += parseFloat(cruise.fare);
+	}else {
+		$("#cruise-table").hide();
+		$("#cruise-label").hide();
 	}
 	var car_rental = sessionStorage.getItem("car_rental");
 	if (car_rental != null){
 		car_rental = JSON.parse(car_rental);
 		loadTable3();
 		price += parseFloat(car_rental.daily_rate);
+	}else {
+		$("#car-rental-table").hide();
+		$("#car-rental-label").hide();
 	}
 	var accommodation = sessionStorage.getItem("accommodation");
 	if (accommodation != null){
@@ -24,9 +33,12 @@ var price = 0;
 		console.log(accommodation);
 		loadTable4();
 		price += parseFloat(accommodation.daily_rate);
+	}else {
+		$("#accommodation-table").hide();
+		$("#accommodation-label").hide();
 	}
 	document.getElementById("price").value = price;
-	$('p#amntdue').text("$ "+ price+".00");
+	$('p#amntdue').text("Total: $ "+ price+".00");
 });
 
 function loadTable() {

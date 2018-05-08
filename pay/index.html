@@ -43,10 +43,10 @@
               <input class="inputCard" type="number" min="1000" max="9999" name="cc3" id="cc3" required="required"> -
               <input class="inputCard" type="number" min="1000" max="9999" name="cc4" id="cc4" required="required">
                </div>
-            <div class="form-group my-2 "> Card Expiration:
+            <div class="form-group my-3 "> Card Expiration:
               <input class="inputCard" name="expiry" id="expiry" type="month" required="required">
               <input id="price" name="price" type="hidden" value="0">
-              <div class="form-group w-25"><label for="exampleInputEmail1"></label>Payment Type:
+              <div class="form-group w-25 my-2"><label for="exampleInputEmail1"></label>Payment Type:
               	<select class="form-control" name = "paymenttype" id="paymenttype">
               		<option value="Visa">Visa</option>
               		<option value="MasterCard">MasterCard</option>
@@ -54,9 +54,9 @@
               		<option value="American Express">American Express</option>
               	</select>
 
-        <div class="row">
-			<div class="col-lg-12">
-				<table id="flight-table" class="table">
+        <div class="row my-2">
+			<div id="flight-label" class="col-lg-12">Flight: 
+      <table id="flight-table" class="table">
 					<thead>
 						<tr>
 							<th scope="col">Airline</th>
@@ -74,7 +74,7 @@
 			</div>
 		</div>
 <div class="row">
-      <div class="col-lg-12">
+      <div id="cruise-label" class="col-lg-12">Cruise:
         <table id="cruise-table" class="table">
           <thead>
             <tr>
@@ -92,7 +92,8 @@
         </table>
       </div>
     </div>
-    <div class="col-lg-12">
+    <div class="row">
+    <div id="car-rental-label" class="col-lg-12">Car Rental:
         <table id="car-rental-table" class="table">
           <thead>
             <tr>
@@ -110,7 +111,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-12">
+      <div id="accommodation-label" class="col-lg-12"> Accomodation:
         <table id="accommodation-table" class="table">
           <thead>
             <tr>
