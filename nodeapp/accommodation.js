@@ -53,7 +53,7 @@ router.post('/', function(req, res) {
 			"FROM accommodation, location WHERE location_id = location.id) AS res";
 	}
 	query += " ORDER BY daily_rate"; 
-	query += ";";
+	query += " LIMIT 1000;";
 	console.log(query);
 	db.query(query, params, function (err, dbRes) {
 		if (err) {

@@ -1,4 +1,4 @@
-const serverURL = "http://130.245.170.55";
+const serverURL = "http://18.221.125.221";
 $(document).ready(function() {
 	var price = 0;
 	var flight = sessionStorage.getItem("flight");

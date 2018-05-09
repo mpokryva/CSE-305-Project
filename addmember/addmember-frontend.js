@@ -1,4 +1,5 @@
 var memberIds = [];
+var personAdded = false;
 $(document).ready(function() {
 	$("#addmember-form").submit(function(e) {
 		e.preventDefault();
@@ -12,12 +13,19 @@ $(document).ready(function() {
 				console.log(res);
 				memberIds.push(res.id);
 				sessionStorage.setItem("member_ids", JSON.stringify(memberIds));	
+				$("#finish-button").removeClass("disabled");
 			}, 
 			error: function(err) {
 				console.log(err);
 				alert(err);
 			}
 		});
+	});
+	$("#finish-button").click(function(e) {
+		if ($(this).hasClass("disabled")) {
+			alert("Please add at least one person");
+			e.preventDefault();
+		}
 	});
 });
 

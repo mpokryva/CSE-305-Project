@@ -80,7 +80,7 @@ router.post('/', function(req, res) {
 		"location where cruise.dep_id = location.id) as arr " +
 		"on dep.cruise_no = arr.cruise_no) as res";
 	}
-	query += ";";
+	query += " LIMIT 1000;";
 	console.log(query);
 	db.query(query, params, function (err, dbRes) {
 		if (err) {

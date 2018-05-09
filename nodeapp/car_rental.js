@@ -55,7 +55,7 @@ router.post('/', function(req, res) {
 	}
 	const sortParam = (sortBy == "Price") ? "daily_rate" : "seating_capacity";
 	query += " ORDER BY " + sortParam; 
-	query += ";";
+	query += " LIMIT 1000;";
 	console.log(query);
 	db.query(query, params, function (err, dbRes) {
 		if (err) {

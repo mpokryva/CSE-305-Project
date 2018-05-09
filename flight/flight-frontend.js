@@ -1,6 +1,6 @@
 var results = [];
 var selectedIndex = 0;
-const serverURL = "http://130.245.170.55";
+const serverURL = "http://18.221.125.221";
 $(document).ready(function() {
 	loadTable();
 	$("#flight-table tbody").on("click", "tr", function(event) {

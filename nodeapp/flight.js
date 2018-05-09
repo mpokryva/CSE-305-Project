@@ -81,7 +81,7 @@ router.post('/', function(req, res) {
 	"location where flight.dep_id = location.id) as arr " +
     "on dep.flight_no = arr.flight_no) as res";
 	}
-	query += ";";
+	query += " LIMIT 1000;";
 	console.log(query);
 	db.query(query, params, function (err, dbRes) {
 		if (err) {

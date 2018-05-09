@@ -1,6 +1,6 @@
 var memberIds = [];
 
-const serverURL = "http://130.245.170.55";
+const serverURL = "http://18.221.125.221";
 $(document).ready(function() {
 	$("#addmember-form").submit(function(e) {
 		e.preventDefault();
